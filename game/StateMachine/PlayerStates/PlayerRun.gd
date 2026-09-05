@@ -1,4 +1,5 @@
 extends PlayerState
+
 @export var fall_state: PlayerState
 
 
@@ -17,3 +18,4 @@ func physics_update(delta: float) -> void:
 
 func handle_input(event: InputEvent) -> void:
 	check_dash(event)
+	check_attack(event)

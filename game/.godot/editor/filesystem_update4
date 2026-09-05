@@ -19,3 +19,6 @@ res://Player/foot_bone.gd
 res://default_bus_layout.tres
 res://Player/weapon_slot.gd
 res://Components/HealthComponent.gd
+res://Components/AttackCompenent.gd
+res://StateMachine/PlayerStates/PlayerAttack.gd
+res://Levels/LevelTemplate.tscn
