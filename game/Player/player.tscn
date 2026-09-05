@@ -1,6 +1,10 @@
 [gd_scene format=3 uid="uid://dveet4y3bg7gi"]
 
 [ext_resource type="Script" uid="uid://c8xqs3urnbcmx" path="res://Player/player.gd" id="1_l8h54"]
+[ext_resource type="Script" uid="uid://cmbcvwh0p2jjq" path="res://StateMachine/StateMachine.gd" id="2_4ntmi"]
+[ext_resource type="Script" uid="uid://bl3atn6ac8tfd" path="res://StateMachine/PlayerStates/PlayerRun.gd" id="3_btcbx"]
+[ext_resource type="Script" uid="uid://c2fahn2m2se57" path="res://StateMachine/PlayerStates/PlayerFall.gd" id="4_gwnis"]
+[ext_resource type="Script" uid="uid://ynxg2aktk8hr" path="res://StateMachine/PlayerStates/PlayerDash.gd" id="5_k53q1"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_hvfyp"]
 
@@ -16,8 +20,38 @@ mesh = SubResource("CapsuleMesh_hvfyp")
 shape = SubResource("CapsuleShape3D_l8h54")
 
 [node name="CameraRoot" type="Node3D" parent="." unique_id=2526914]
-transform = Transform3D(-0.70710677, -0.5416752, 0.45451948, 0, 0.64278764, 0.76604444, -0.70710677, 0.5416752, -0.45451948, 0, 0, 0)
+transform = Transform3D(-0.7071067, -0.5416752, 0.45451948, 0, 0.64278764, 0.76604444, -0.7071067, 0.5416752, -0.45451948, 0, 0, 0)
 
 [node name="Camera3D" type="Camera3D" parent="CameraRoot" unique_id=80870162]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 fov = 65.0
+
+[node name="StateMachine" type="Node" parent="." unique_id=1491527537 node_paths=PackedStringArray("initial_state")]
+script = ExtResource("2_4ntmi")
+initial_state = NodePath("PlayerRun")
+
+[node name="PlayerRun" type="Node" parent="StateMachine" unique_id=1494783254 node_paths=PackedStringArray("fall_state", "player", "dash_state")]
+script = ExtResource("3_btcbx")
+fall_state = NodePath("../PlayerFall")
+player = NodePath("../..")
+dash_state = NodePath("../PlayerDash")
+
+[node name="PlayerFall" type="Node" parent="StateMachine" unique_id=1254147968 node_paths=PackedStringArray("run_state", "player", "dash_state")]
+script = ExtResource("4_gwnis")
+run_state = NodePath("../PlayerRun")
+player = NodePath("../..")
+dash_state = NodePath("../PlayerDash")
+
+[node name="PlayerDash" type="Node" parent="StateMachine" unique_id=243521622 node_paths=PackedStringArray("running_state", "player", "dash_state")]
+script = ExtResource("5_k53q1")
+running_state = NodePath("../PlayerRun")
+player = NodePath("../..")
+dash_state = NodePath(".")
+
+[node name="DashDuration" type="Timer" parent="StateMachine/PlayerDash" unique_id=1676979332]
+wait_time = 0.1
+one_shot = true
+
+[node name="DashCooldown" type="Timer" parent="StateMachine/PlayerDash" unique_id=737031826]
+wait_time = 0.3
+one_shot = true

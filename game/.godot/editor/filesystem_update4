@@ -1,3 +1,11 @@
+res://Player/player.gd
 res://Player/player.tscn
 res://Levels/Gridmap/floormap.tres
 res://Levels/Gridmap/wall_map.tres
+res://StateMachine/PlayerState.gd
+res://StateMachine/PlayerStates/PlayerRun.gd
+res://StateMachine/PlayerStates/PlayerFall.gd
+res://Levels/Gridmap/floormap.tscn
+res://Levels/Gridmap/wall_map.tscn
+res://StateMachine/PlayerStates/PlayerDash.gd
+res://Player/animated_player.tscn

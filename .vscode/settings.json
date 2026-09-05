@@ -1,0 +1,19 @@
+{
+	"editor.renderWhitespace": "all",
+	"editor.tabSize": 2,
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"[gdscript]": {
+		"editor.formatOnSave": true,
+		"editor.defaultFormatter": "geequlim.godot-tools"
+	},
+	"godotTools.editor.revealTerminal": true,
+	"VSCodeCounter.exclude": [
+		"**/.gitignore",
+		"**/.vscode/**",
+		"game/.godot/**",
+		"game/addons/**"
+	],
+	"files.insertFinalNewline": true,
+	"files.eol": "\n"
+}
