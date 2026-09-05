@@ -7,6 +7,7 @@ class_name Player extends CharacterBody3D
 @onready var dash_cooldown: Timer = $StateMachine/PlayerDash/DashCooldown
 @onready var mannequin_animation_tree: AnimationTree = $GamedevTV_Mannequin_Medium/MannequinAnimationTree
 @onready var player_root: Node3D = $GamedevTV_Mannequin_Medium
+@onready var health_component: HealthComponent = $HealthComponent
 
 func get_movement_direction() -> Vector3:
 	var input := Vector3.ZERO
@@ -23,6 +24,9 @@ func get_movement_direction() -> Vector3:
 	input = input.rotated(Vector3.UP, camera_rotation)
 
 	return input.normalized()
+
+func _ready() -> void:
+	health_component.defeat.connect(on_defeat)
 
 
 func can_dash() -> bool:
@@ -57,3 +61,7 @@ func get_aim_direction() -> Vector3:
 	var direction_3d = Vector3(direction.x, 0, direction.y)
 	var camera_rotation = get_viewport().get_camera_3d().global_rotation.y
 	return direction_3d.rotated(Vector3.UP, camera_rotation)
+
+
+func on_defeat() -> void:
+	get_tree().reload_current_scene()
