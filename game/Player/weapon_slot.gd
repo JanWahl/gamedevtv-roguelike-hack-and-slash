@@ -1,0 +1,21 @@
+class_name WeaponSlot extends BoneAttachment3D
+
+signal range_attack
+signal slash
+
+enum Mode {
+	NONE,
+	SLASH,
+	STAB
+}
+
+@export var shapecast: ShapeCast3D
+@export var attack_mode: Mode = Mode.NONE
+@export var vfx_threshold: float = 0.0
+@export var enabled: bool = false:
+	set(value):
+		if enabled == false and value == true:
+			slash.emit()
+		enabled = value
+		if shapecast:
+			shapecast.enabled = enabled

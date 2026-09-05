@@ -4,9 +4,10 @@ class_name PlayerState extends State
 
 @export var dash_state: PlayerState
 
-func core_movement(_delta: float, speed: float) -> void:
+func core_movement(delta: float, speed: float) -> void:
 	var direction := player.get_movement_direction()
 	player.velocity = direction * speed
+	player.look_toward_direction(direction, delta)
 
 
 func check_dash(event: InputEvent) -> void:

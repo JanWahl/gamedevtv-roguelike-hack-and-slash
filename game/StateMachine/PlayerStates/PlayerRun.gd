@@ -4,6 +4,10 @@ extends PlayerState
 
 func physics_update(delta: float) -> void:
 	core_movement(delta, player.movement_speed)
+	if player.get_movement_direction():
+		player.mannequin_animation_tree.blend_target = 1.0
+	else:
+		player.mannequin_animation_tree.blend_target = -1.0
 
 	if not player.is_on_floor():
 		finished.emit(fall_state.name)

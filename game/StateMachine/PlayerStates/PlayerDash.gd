@@ -12,6 +12,7 @@ func enter(_previous_state_path: String, data := {}) -> void:
 	player.velocity = direction * player.dash_speed
 	dash_duration.start()
 	dash_cooldown.start()
+	player.mannequin_animation_tree.change_immediate("Dodge_Forward")
 
 
 func physics_update(_delta: float) -> void:
